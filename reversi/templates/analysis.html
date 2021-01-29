@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Analysis Result | RL Analysis{% endblock %}
+{% block head %}
+<script>
+    var data = "{{ value|safe }}";
+    console.log(data);
+</script>
+
+<style type="text/css">
+    #table td {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    vertical-align: middle;
+    table-layout: fixed;
+    padding: 1px 1px 1px 1px;
+    font-size: 33px;
+    }
+</style>
+
+{% endblock %}
+
+{% block contents %}
+<div style="margin-bottom : 30px">
+    <h1>Reversi Analysis Result</h1>
+    <p>以下は、プレイ結果を元に、あなたがどのマスに打つ傾向があるか表したものです。</p>
+    <p>色が濃いマスほど良く打つマスです。</p>
+</div>
+<table id="table"></table>
+<script>
+    num_actions = data.split(",")
+    na = []
+    data = []
+    for(i=0; i<num_actions.length; i++){
+        na.push(Number(num_actions[i]))
+        if(na.length == 6){
+            data.push(na)
+            na = []
+        }
+    }
+    var table = document.getElementById("table");
+
+    for(i = 0; i < data.length; i++){
+        var tr = document.createElement("tr"); 
+        table.appendChild(tr);
+        for(j = 0; j < data[0].length; j++){
+            td = document.createElement("td");
+            td.style.backgroundColor = "rgb(" + (255 - data[i][j]*255) + ", 255, 255)";
+            tr.appendChild(td);
+        }
+    }
+</script>
+{% endblock %}

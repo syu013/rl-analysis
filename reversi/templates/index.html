@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Reversi | RL Analysis{% endblock %}
+
+{% block head %}
+<link rel="shortcut icon" href="{% static 'reversi/TemplateData/favicon.ico' %}">
+<link rel="stylesheet" href="{% static 'reversi/TemplateData/style.css' %}">
+<script src="{% static 'reversi/TemplateData/UnityProgress.js' %}"></script>
+<script src="{% static 'reversi/Build/UnityLoader.js' %}"></script>
+<script>
+  var unityInstance = UnityLoader.instantiate("unityContainer", "{% static 'reversi/Build/ReversiWebGL.json' %}", {onProgress: UnityProgress});
+</script>
+{% endblock %}
+
+{% block contents %}
+<div>
+  <h1>Reversi</h1>
+  <p><strong>Analyze</strong>をクリックするとあなたのプレイを分析できます。</p>
+</div>
+<div style="margin : 30px">
+  <form action="{% url 'reversi:index' %}" method="post">
+    {%csrf_token%}
+    <button class="btn btn-lg btn-info" name="analysis" value="analysis">Analyze</button>
+  </form>
+</div>
+<div class="webgl-content">
+  <div id="unityContainer" style="position: relative; width: 960px; height: 600px"></div>
+</div>
+
+
+
+{% endblock %}

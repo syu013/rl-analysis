@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}ログイン | RL Analysis{% endblock %}
+
+{% block log_in %}active{% endblock %}
+
+{% block contents %}
+<h1>ログイン</h1>
+<form class="login" method="POST" action="{% url 'account_login' %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
+    {% endif %}
+    <div style="margin-bottom : 10px">
+        <a href="{% url 'account_signup' %}">新規登録はこちら</a>
+    </div>
+    <button class="btn btn-primary" type="submit">ログイン</button>
+</form>
+{% endblock %}

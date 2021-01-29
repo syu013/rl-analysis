@@ -1,0 +1,6 @@
+[submodule "reversi/gym_reversi"]
+	path = reversi/gym_reversi
+	url = https://github.com/syu013/gym-reversi.git
+[submodule "reversi/alpha_zero"]
+	path = reversi/alpha_zero
+	url = https://github.com/syu013/alpha-zero.git
